@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">News Feed</string>
+    <string name="skip_signin">Skip SignIn</string>
+    <string name="handle_signin_log">handleSignInResult:</string>
+    <string name="loading">Loading ...</string>
+    <string name="unable_to_signin">Unable to Sign In</string>
+</resources>

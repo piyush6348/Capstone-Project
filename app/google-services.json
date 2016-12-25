@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "829665736755",
+    "project_id": "news-feed-f7d8c"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829665736755:android:5d820d2089de6064",
+        "android_client_info": {
+          "package_name": "capstoneproject.androidnanodegree.com.capstoneproject2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829665736755-jg0vv40cjqelq6n648jvqafv1p139q32.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "capstoneproject.androidnanodegree.com.capstoneproject2",
+            "certificate_hash": "0C731FE4A71785D636BBF3E648BBA58A86312868"
+          }
+        },
+        {
+          "client_id": "829665736755-if6d6dd6u22j04qmi25u6f8a6s7436sr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUcd2KQtoptG_MVNrHJnw4FBvXRuIP8pA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
