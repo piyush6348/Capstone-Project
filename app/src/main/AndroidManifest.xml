@@ -20,6 +20,24 @@
         </activity>
         <activity android:name=".activity.NewsListActivity" />
 
+        <receiver
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:label="@string/app_name"
+            android:name="capstoneproject.androidnanodegree.com.capstoneproject2.widget.SimpleWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.ItemWidgetList"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false" />
+
         <provider
             android:name=".database.generated.QuoteProvider"
             android:authorities="capstoneproject.androidnanodegree.com.capstoneproject2.database.QuoteProvider"
