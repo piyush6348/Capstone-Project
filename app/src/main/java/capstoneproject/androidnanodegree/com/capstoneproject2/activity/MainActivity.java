@@ -4,10 +4,10 @@ package capstoneproject.androidnanodegree.com.capstoneproject2.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -25,14 +25,15 @@ import com.google.android.gms.common.api.Status;
 import capstoneproject.androidnanodegree.com.capstoneproject2.R;
 import capstoneproject.androidnanodegree.com.capstoneproject2.utils.Constants;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
-    private static  String TAG ;
+    private static String TAG;
     private static final int RC_SIGN_IN = 9001;
     private ProgressDialog mProgressDialog;
     private CoordinatorLayout coordinateLayout;
     private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,17 +42,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TAG=this.getClass().getSimpleName();
+        TAG = this.getClass().getSimpleName();
 
         checkSignIn();
 
-        coordinateLayout=(CoordinatorLayout) findViewById(R.id.coordinator_layout);
+        coordinateLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this ,this )
+                .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private void checkSignIn() {
         SharedPreferences prefs = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
-        String restoredText = prefs.getString("signin","false");
+        String restoredText = prefs.getString("signin", "false");
         if (restoredText != "false") {
             updateUI(true);
         }
@@ -136,23 +137,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     private void updateUI(boolean b) {
-        if(b)
-        {
-            Intent intent=new Intent(MainActivity.this,NewsListActivity.class);
+        if (b) {
+            Intent intent = new Intent(MainActivity.this, NewsListActivity.class);
             startActivity(intent);
             finish();
-        }
-        else
-        {
-            Log.e(TAG, "updateUI: "+"cannot connect" );
+        } else {
+            Log.e(TAG, "updateUI: " + "cannot connect");
         }
     }
 
     @Override
     public void onClick(View view) {
 
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.sign_in_button:
                 signIn();
                 break;
@@ -193,8 +190,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     @Override
-    public void onConnectionFailed( ConnectionResult connectionResult) {
-        Snackbar snackbar=Snackbar.make(coordinateLayout, R.string.unable_to_signin,Snackbar.LENGTH_SHORT);
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Snackbar snackbar = Snackbar.make(coordinateLayout, R.string.unable_to_signin, Snackbar.LENGTH_SHORT);
         snackbar.show();
 
     }

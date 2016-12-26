@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
@@ -20,21 +19,21 @@ import com.squareup.picasso.Picasso;
 
 import capstoneproject.androidnanodegree.com.capstoneproject2.R;
 import capstoneproject.androidnanodegree.com.capstoneproject2.activity.NewsDetailActivity;
-import capstoneproject.androidnanodegree.com.capstoneproject2.activity.NewsListActivity;
 import capstoneproject.androidnanodegree.com.capstoneproject2.database.QuoteProvider;
 
 public class NewsListCursorAdapter extends CursorRecyclerViewAdapter<NewsListCursorAdapter.ViewHolder> {
 
     static private Context context;
     Activity activity;
+
     public NewsListCursorAdapter(Context context, Cursor cursor, Activity activity) {
         super(context, cursor);
         this.context = context;
-        this.activity=activity;
+        this.activity = activity;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView newsHeadline,newsDescription;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView newsHeadline, newsDescription;
         public ImageView newsImage;
         private FirebaseAnalytics mFirebaseAnalytics;
 
@@ -59,18 +58,18 @@ public class NewsListCursorAdapter extends CursorRecyclerViewAdapter<NewsListCur
             c.moveToFirst();
             c.moveToPosition(getAdapterPosition());
 
-            Log.e( "onClick: ", "Hi"+c.getString(c.getColumnIndex("newsTitle")) );
+            Log.e("onClick: ", "Hi" + c.getString(c.getColumnIndex("newsTitle")));
 
-            Bundle bundle1=new Bundle();
-            bundle1.putString("title",c.getString(c.getColumnIndex("newsTitle")));
-            bundle1.putString("description",c.getString(c.getColumnIndex("newsDescription")));
-            bundle1.putString("url",c.getString(c.getColumnIndex("newsImageUrl")));
+            Bundle bundle1 = new Bundle();
+            bundle1.putString("title", c.getString(c.getColumnIndex("newsTitle")));
+            bundle1.putString("description", c.getString(c.getColumnIndex("newsDescription")));
+            bundle1.putString("url", c.getString(c.getColumnIndex("newsImageUrl")));
 
-            Intent intent=new Intent(context, NewsDetailActivity.class);
+            Intent intent = new Intent(context, NewsDetailActivity.class);
             intent.putExtras(bundle1);
-            ActivityOptionsCompat optionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation
-                    (activity,newsImage,newsImage.getTransitionName());
-            context.startActivity(intent,optionsCompat.toBundle());
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
+                    (activity, newsImage, newsImage.getTransitionName());
+            context.startActivity(intent, optionsCompat.toBundle());
         }
     }
 

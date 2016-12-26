@@ -14,4 +14,5 @@
     <string name="invitation_message">Hey, check out this cool App!</string>
     <string name="invitation_cta">Install!</string>
     <string name="shared_element_name" />
+    <string name="unable_to_connect">Unable to Connect...</string>
 </resources>

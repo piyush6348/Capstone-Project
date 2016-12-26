@@ -7,26 +7,26 @@ import net.simonvt.schematic.annotation.ContentUri;
 import net.simonvt.schematic.annotation.InexactContentUri;
 import net.simonvt.schematic.annotation.TableEndpoint;
 
-@ContentProvider(authority = QuoteProvider.AUTHORITY,database = DatabseDefinition.class)
+@ContentProvider(authority = QuoteProvider.AUTHORITY, database = DatabseDefinition.class)
 public class QuoteProvider {
     public static final String AUTHORITY = "capstoneproject.androidnanodegree.com.capstoneproject2.database.QuoteProvider";
 
     static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
-    interface Path{
+    interface Path {
         String QUOTES = "quotes";
     }
 
-    private static Uri buildUri(String... paths){
+    private static Uri buildUri(String... paths) {
         Uri.Builder builder = BASE_CONTENT_URI.buildUpon();
-        for (String path:paths){
+        for (String path : paths) {
             builder.appendPath(path);
         }
         return builder.build();
     }
 
     @TableEndpoint(table = DatabseDefinition.QUOTES)
-    public static class Quotes{
+    public static class Quotes {
         @ContentUri(
                 path = Path.QUOTES,
                 type = "vnd.android.cursor.dir/quote"
@@ -40,7 +40,7 @@ public class QuoteProvider {
                 whereColumn = DatabseColumns.TITLE,
                 pathSegment = 1
         )
-        public static Uri withSymbol(String symbol){
+        public static Uri withSymbol(String symbol) {
             return buildUri(Path.QUOTES, symbol);
         }
     }
