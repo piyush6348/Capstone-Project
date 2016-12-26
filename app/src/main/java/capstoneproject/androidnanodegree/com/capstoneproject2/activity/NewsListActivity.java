@@ -1,6 +1,11 @@
 package capstoneproject.androidnanodegree.com.capstoneproject2.activity;
 
+import android.content.ContentProviderOperation;
+import android.content.ContentValues;
+import android.content.OperationApplicationException;
+import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +13,11 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
+
 import capstoneproject.androidnanodegree.com.capstoneproject2.R;
+import capstoneproject.androidnanodegree.com.capstoneproject2.database.DatabseColumns;
+import capstoneproject.androidnanodegree.com.capstoneproject2.database.QuoteProvider;
 import capstoneproject.androidnanodegree.com.capstoneproject2.models.NewsItemList;
 import capstoneproject.androidnanodegree.com.capstoneproject2.network.NewsApiResponse;
 import capstoneproject.androidnanodegree.com.capstoneproject2.utils.Constants;
@@ -50,6 +59,39 @@ public class NewsListActivity extends AppCompatActivity {
             Gson gson= new GsonBuilder().create();
             NewsItemList newsItemList=gson.fromJson(s,NewsItemList.class);
             Log.e(TAG, "onPostExecute: "+ newsItemList.getNewsItemList().size() );
+
+            for(int i=0;i<newsItemList.getNewsItemList().size();i++)
+            {
+                int presence=1;
+
+                Cursor cursor=getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,null,null,null,null);
+                cursor.moveToFirst();
+
+                String newsTitle=newsItemList.getNewsItemList().get(i).getTitle();
+                String newsDescription=newsItemList.getNewsItemList().get(i).getDescription();
+                String newsUrlToImage=newsItemList.getNewsItemList().get(i).getUrlToImage();
+
+                if(cursor.getCount()>0)
+                {
+                    do {
+                        if(newsTitle.equalsIgnoreCase(cursor.getString(cursor.getColumnIndex("newsTitle"))))
+                        {
+                            presence=0;
+                            break;
+                        }
+                    }while (cursor.moveToNext());
+                }
+
+                if(presence==1)
+                {
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put("newsTitle", newsTitle.toString());
+                    contentValues.put("newsDescription", newsDescription.toString());
+                    contentValues.put("newsImageUrl", newsUrlToImage.toString());
+
+                    getContentResolver().insert(QuoteProvider.Quotes.CONTENT_URI, contentValues);
+                }
+            }
         }
 
     }

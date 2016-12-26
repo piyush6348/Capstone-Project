@@ -19,6 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.NewsListActivity"></activity>
+
+        <provider
+            android:authorities="capstoneproject.androidnanodegree.com.capstoneproject2.database.QuoteProvider"
+            android:name="capstoneproject.androidnanodegree.com.capstoneproject2.database.generated.QuoteProvider"
+            android:exported="true" />
     </application>
 
 </manifest>
