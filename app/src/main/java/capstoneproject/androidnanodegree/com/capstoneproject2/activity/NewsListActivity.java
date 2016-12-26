@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -16,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 
 import capstoneproject.androidnanodegree.com.capstoneproject2.R;
+import capstoneproject.androidnanodegree.com.capstoneproject2.adapter.NewsListCursorAdapter;
 import capstoneproject.androidnanodegree.com.capstoneproject2.database.DatabseColumns;
 import capstoneproject.androidnanodegree.com.capstoneproject2.database.QuoteProvider;
 import capstoneproject.androidnanodegree.com.capstoneproject2.models.NewsItemList;
@@ -25,10 +28,15 @@ import capstoneproject.androidnanodegree.com.capstoneproject2.utils.Constants;
 public class NewsListActivity extends AppCompatActivity {
 
     private static  String TAG ;
+    private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_list);
+
+        recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
 
         TAG=this.getClass().getSimpleName();
         new NewsList().execute();
@@ -92,6 +100,12 @@ public class NewsListActivity extends AppCompatActivity {
                     getContentResolver().insert(QuoteProvider.Quotes.CONTENT_URI, contentValues);
                 }
             }
+
+            Cursor cur=getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,null,null,null,null);
+            NewsListCursorAdapter adapter=new NewsListCursorAdapter(NewsListActivity.this,cur);
+            adapter.notifyDataSetChanged();
+
+            recyclerView.setAdapter(adapter);
         }
 
     }

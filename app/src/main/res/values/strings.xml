@@ -4,4 +4,8 @@
     <string name="handle_signin_log">handleSignInResult:</string>
     <string name="loading">Loading ...</string>
     <string name="unable_to_signin">Unable to Sign In</string>
+    <string name="exception">this should only be called when the cursor is valid</string>
+    <string name="image">News image</string>
+    <string name="heading">News Heading</string>
+    <string name="description">News Description</string>
 </resources>
