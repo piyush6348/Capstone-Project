@@ -18,12 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.NewsListActivity"></activity>
+        <activity android:name=".activity.NewsListActivity" />
 
         <provider
+            android:name=".database.generated.QuoteProvider"
             android:authorities="capstoneproject.androidnanodegree.com.capstoneproject2.database.QuoteProvider"
-            android:name="capstoneproject.androidnanodegree.com.capstoneproject2.database.generated.QuoteProvider"
             android:exported="true" />
+
+        <activity android:name=".activity.NewsDetailActivity"></activity>
     </application>
 
 </manifest>

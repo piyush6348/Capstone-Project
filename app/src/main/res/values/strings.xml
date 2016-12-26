@@ -8,4 +8,6 @@
     <string name="image">News image</string>
     <string name="heading">News Heading</string>
     <string name="description">News Description</string>
+    <string name="powered_by_piyush_gupta">Powered by Piyush Gupta</string>
+    <string name="share">Share</string>
 </resources>

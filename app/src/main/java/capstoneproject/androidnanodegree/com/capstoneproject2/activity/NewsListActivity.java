@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -29,10 +30,14 @@ public class NewsListActivity extends AppCompatActivity {
 
     private static  String TAG ;
     private RecyclerView recyclerView;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_list);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -63,10 +68,10 @@ public class NewsListActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Log.e(TAG, "onPostExecute: "+s );
+            //Log.e(TAG, "onPostExecute: "+s );
             Gson gson= new GsonBuilder().create();
             NewsItemList newsItemList=gson.fromJson(s,NewsItemList.class);
-            Log.e(TAG, "onPostExecute: "+ newsItemList.getNewsItemList().size() );
+           // Log.e(TAG, "onPostExecute: "+ newsItemList.getNewsItemList().size() );
 
             for(int i=0;i<newsItemList.getNewsItemList().size();i++)
             {
@@ -78,6 +83,8 @@ public class NewsListActivity extends AppCompatActivity {
                 String newsTitle=newsItemList.getNewsItemList().get(i).getTitle();
                 String newsDescription=newsItemList.getNewsItemList().get(i).getDescription();
                 String newsUrlToImage=newsItemList.getNewsItemList().get(i).getUrlToImage();
+
+                Log.e("onPostExecute: ", i+ " "+ newsTitle);
 
                 if(cursor.getCount()>0)
                 {
