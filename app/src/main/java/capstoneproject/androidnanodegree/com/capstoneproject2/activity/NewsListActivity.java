@@ -109,7 +109,7 @@ public class NewsListActivity extends AppCompatActivity {
             }
 
             Cursor cur=getContentResolver().query(QuoteProvider.Quotes.CONTENT_URI,null,null,null,null);
-            NewsListCursorAdapter adapter=new NewsListCursorAdapter(NewsListActivity.this,cur);
+            NewsListCursorAdapter adapter=new NewsListCursorAdapter(NewsListActivity.this,cur,NewsListActivity.this);
             adapter.notifyDataSetChanged();
 
             recyclerView.setAdapter(adapter);

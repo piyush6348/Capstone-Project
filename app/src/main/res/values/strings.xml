@@ -13,4 +13,5 @@
     <string name="invitation_title">Invitation to download News Feed</string>
     <string name="invitation_message">Hey, check out this cool App!</string>
     <string name="invitation_cta">Install!</string>
+    <string name="shared_element_name" />
 </resources>

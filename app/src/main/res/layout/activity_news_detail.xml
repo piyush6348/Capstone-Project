@@ -19,6 +19,7 @@
                 android:id="@+id/news_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:transitionName="@string/shared_element_name"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop" />
